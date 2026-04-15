@@ -1,0 +1,277 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maximilian Robijns - Design Showcase</title>
+  <style>
+    :root {
+      --bg: #111214;
+      --panel: #1a1c20;
+      --panel-2: #23262c;
+      --text: #f5f6f7;
+      --muted: #b1b6bf;
+      --accent: #f0a13b;
+      --border: #31363f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at 15% 10%, #1c212c 0%, var(--bg) 50%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 1rem clamp(1rem, 3vw, 2rem);
+      border-bottom: 1px solid var(--border);
+      background: rgba(17, 18, 20, 0.85);
+      backdrop-filter: blur(6px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      margin: 0.35rem 0 0;
+      color: var(--muted);
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+    }
+
+    main {
+      width: min(1100px, 100% - 2rem);
+      margin: 1rem auto 2rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .viewer {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .stage {
+      margin: 0;
+      background: #0d0f12;
+      min-height: min(68vh, 700px);
+      display: grid;
+      place-items: center;
+      padding: 0.75rem;
+    }
+
+    .stage img {
+      width: 100%;
+      height: 100%;
+      max-height: calc(68vh - 1.5rem);
+      object-fit: contain;
+      border-radius: 8px;
+      display: block;
+      background: #090b0d;
+    }
+
+    .meta {
+      padding: 0.8rem 0.9rem 1rem;
+      background: var(--panel-2);
+      border-top: 1px solid var(--border);
+    }
+
+    .meta strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .meta span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 0.5rem;
+      align-items: stretch;
+    }
+
+    button {
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 0.6rem 0.75rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    button:hover { border-color: var(--accent); }
+
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    .thumb {
+      width: 100%;
+      background: #0f1115;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.3rem;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 72px;
+      object-fit: cover;
+      border-radius: 7px;
+      display: block;
+    }
+
+    .thumb.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(240, 161, 59, 0.45) inset;
+    }
+
+    @media (max-width: 760px) {
+      main { width: min(100% - 1rem, 1100px); }
+
+      .stage {
+        min-height: 54vh;
+        padding: 0.5rem;
+      }
+
+      .stage img {
+        max-height: calc(54vh - 1rem);
+      }
+
+      .controls {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .thumbs {
+        grid-column: 1 / -1;
+      }
+
+      button { padding: 0.65rem 0.7rem; }
+
+      .thumb img { height: 64px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Maximilian Robijns - Website Design Showcase</h1>
+    <p class="subtitle">Browse 3 concepts on desktop or mobile. Use buttons, thumbnails, or keyboard arrows.</p>
+  </header>
+
+  <main>
+    <section class="viewer" aria-label="Design viewer">
+      <figure class="stage">
+        <img id="mainImage" src="design-exports/esc70.png" alt="Design 1 preview" />
+      </figure>
+
+      <div class="meta">
+        <strong id="designTitle">Design 1 - Cinematic Dark</strong>
+        <span id="designCaption">Concept 1 of 3</span>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="Gallery controls">
+      <button id="prevBtn" type="button" aria-label="Previous design">Previous</button>
+
+      <div class="thumbs" id="thumbs"></div>
+
+      <button id="nextBtn" type="button" aria-label="Next design">Next</button>
+    </section>
+  </main>
+
+  <script>
+    const designs = [
+      {
+        title: 'Design 1 - Cinematic Dark',
+        caption: 'Concept 1 of 3',
+        src: 'design-exports/esc70.png'
+      },
+      {
+        title: 'Design 2 - Monumental Editorial',
+        caption: 'Concept 2 of 3',
+        src: 'design-exports/qM8d0.png'
+      },
+      {
+        title: 'Design 3 - Artisan Editorial Warm',
+        caption: 'Concept 3 of 3',
+        src: 'design-exports/racC2.png'
+      }
+    ];
+
+    const mainImage = document.getElementById('mainImage');
+    const titleNode = document.getElementById('designTitle');
+    const captionNode = document.getElementById('designCaption');
+    const thumbsContainer = document.getElementById('thumbs');
+
+    let index = 0;
+
+    function renderThumbs() {
+      thumbsContainer.innerHTML = '';
+      designs.forEach((design, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'thumb' + (i === index ? ' active' : '');
+        btn.setAttribute('aria-label', `Open ${design.title}`);
+        btn.innerHTML = `<img src="${design.src}" alt="${design.title} thumbnail">`;
+        btn.addEventListener('click', () => show(i));
+        thumbsContainer.appendChild(btn);
+      });
+    }
+
+    function show(i) {
+      index = (i + designs.length) % designs.length;
+      const active = designs[index];
+      mainImage.src = active.src;
+      mainImage.alt = active.title;
+      titleNode.textContent = active.title;
+      captionNode.textContent = active.caption;
+      renderThumbs();
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => show(index - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => show(index + 1));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') show(index - 1);
+      if (event.key === 'ArrowRight') show(index + 1);
+    });
+
+    let touchStartX = null;
+    mainImage.addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+
+    mainImage.addEventListener('touchend', (event) => {
+      if (touchStartX === null) return;
+      const delta = event.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(delta) > 40) {
+        if (delta > 0) show(index - 1);
+        else show(index + 1);
+      }
+      touchStartX = null;
+    }, { passive: true });
+
+    show(0);
+  </script>
+</body>
+</html>
