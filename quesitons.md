@@ -1,0 +1,2 @@
+- Heb je nog 3 andere grote format videos
+- sttat jou insta profiel op prive want dan kan ik namelijk niet je profiel laten zien

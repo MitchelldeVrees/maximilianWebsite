@@ -22,6 +22,7 @@ const workRows = [
       'Social content campaign for Corona Cero during the Olympic Games. Cinematic 9×16 content capturing the spirit of sport and celebration.',
     image:
       'https://images.unsplash.com/photo-1661966522340-a51f578e4017?auto=format&fit=crop&w=1600&q=80',
+    video: '/reels/coronacero.mp4',
     href: 'https://www.instagram.com/p/DWEn2iCjYN_/?img_index=1',
     reverse: false
   },
@@ -32,6 +33,7 @@ const workRows = [
       "Crafting bold social-first video content for Jägermeister, bringing the brand's energy and nightlife culture to Instagram and TikTok.",
     image:
       'https://images.unsplash.com/photo-1748674744311-3a3ec2874836?auto=format&fit=crop&w=1600&q=80',
+    video: '/reels/jagermeister.mp4',
     href: 'https://www.instagram.com/p/DQ6lcdeCJM3/',
     reverse: true
   },
@@ -42,6 +44,7 @@ const workRows = [
       'Creating visually stunning social content for Nikon, showcasing the beauty and capability of their latest camera technology.',
     image:
       'https://images.unsplash.com/photo-1647688744792-29f709c8ecaa?auto=format&fit=crop&w=1600&q=80',
+    video: '/reels/nikon.mp4',
     href: 'https://www.instagram.com/reel/DV_OOG_k_t4/',
     reverse: false
   },
@@ -99,7 +102,19 @@ export default function DesignThreePage() {
             rel="noreferrer"
             className={`${styles.workRow} ${row.reverse ? styles.reverse : ''}`}
           >
-            <div className={styles.workImage} style={{ backgroundImage: `url(${row.image})` }} />
+            <div className={styles.workImage} style={{ backgroundImage: row.video ? undefined : `url(${row.image})` }}>
+              {row.video ? (
+                <video
+                  src={row.video}
+                  poster={row.image}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              ) : null}
+            </div>
             <div className={styles.workText}>
               <p>{row.label}</p>
               <h2>

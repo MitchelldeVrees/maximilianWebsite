@@ -2,18 +2,21 @@
   {
     title: 'Corona Cero × Olympics',
     url: 'https://www.instagram.com/p/DWEn2iCjYN_/?img_index=1',
+    video: '/reels/coronacero.mp4',
     image:
       'https://images.unsplash.com/photo-1514647780138-f0857d147db0?auto=format&fit=crop&w=900&q=80'
   },
   {
     title: 'Jägermeister',
     url: 'https://www.instagram.com/p/DQ6lcdeCJM3/',
+    video: '/reels/jagermeister.mp4',
     image:
       'https://images.unsplash.com/photo-1618007592249-ef95e9424a4d?auto=format&fit=crop&w=900&q=80'
   },
   {
     title: 'Nikon',
     url: 'https://www.instagram.com/reel/DV_OOG_k_t4/',
+    video: '/reels/nikon.mp4',
     image:
       'https://images.unsplash.com/photo-1765573831120-4e7f5e69ffca?auto=format&fit=crop&w=900&q=80'
   },
@@ -26,12 +29,14 @@
   {
     title: 'Women Inc',
     url: 'https://www.instagram.com/p/DFXms2fKXUw/',
+    video: '/reels/womenInc.mp4',
     image:
       'https://images.unsplash.com/photo-1771736817889-b49bdd30ca98?auto=format&fit=crop&w=900&q=80'
   },
   {
     title: 'Lowlander',
     url: 'https://www.instagram.com/p/DV8v_cmDcO2/',
+    video: '/reels/lowlander.mp4',
     image:
       'https://images.unsplash.com/photo-1659459007084-15b336c71192?auto=format&fit=crop&w=900&q=80'
   },
@@ -87,8 +92,20 @@ export default function DesignTwoPage() {
         <div className="d2Grid d2GridA">
           {selectedWork.slice(0, 4).map((item) => (
             <a key={item.title} className="d2Card" href={item.url} target="_blank" rel="noreferrer">
-              <div className="d2CardImg" style={{ backgroundImage: `url(${item.image})` }}>
-                <span className="d2Play">▶</span>
+              <div className="d2CardImg" style={{ backgroundImage: item.video ? undefined : `url(${item.image})` }}>
+                {item.video ? (
+                  <video
+                    src={item.video}
+                    poster={item.image}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+                ) : (
+                  <span className="d2Play">▶</span>
+                )}
               </div>
               <div className="d2CardLabel">{item.title}</div>
             </a>
@@ -98,8 +115,20 @@ export default function DesignTwoPage() {
         <div className="d2Grid d2GridB">
           {selectedWork.slice(4).map((item) => (
             <a key={item.title} className="d2Card" href={item.url} target="_blank" rel="noreferrer">
-              <div className="d2CardImg" style={{ backgroundImage: `url(${item.image})` }}>
-                <span className="d2Play">▶</span>
+              <div className="d2CardImg" style={{ backgroundImage: item.video ? undefined : `url(${item.image})` }}>
+                {item.video ? (
+                  <video
+                    src={item.video}
+                    poster={item.image}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+                ) : (
+                  <span className="d2Play">▶</span>
+                )}
               </div>
               <div className="d2CardLabel">{item.title}</div>
             </a>

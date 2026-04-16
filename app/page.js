@@ -2,18 +2,22 @@
   {
     title: 'CORONA CERO x OLYMPICS',
     url: 'https://www.instagram.com/p/DWEn2iCjYN_/?img_index=1',
+    video: '/reels/coronacero.mp4',
+    videoFit: 'contain',
     image:
       'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80'
   },
   {
     title: 'JAGERMEISTER',
     url: 'https://www.instagram.com/p/DQ6lcdeCJM3/',
+    video: '/reels/jagermeister.mp4',
     image:
       'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=80'
   },
   {
     title: 'NIKON',
     url: 'https://www.instagram.com/reel/DV_OOG_k_t4/',
+    video: '/reels/nikon.mp4',
     image:
       'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=1200&q=80'
   },
@@ -26,12 +30,14 @@
   {
     title: 'WOMEN INC',
     url: 'https://www.instagram.com/p/DFXms2fKXUw/',
+    video: '/reels/womenInc.mp4',
     image:
       'https://images.unsplash.com/photo-1773594033354-f357d40ac267?auto=format&fit=crop&w=1200&q=80'
   },
   {
     title: 'LOWLANDER',
     url: 'https://www.instagram.com/p/DV8v_cmDcO2/',
+    video: '/reels/lowlander.mp4',
     image:
       'https://images.unsplash.com/photo-1746422029383-fe48bb6276f4?auto=format&fit=crop&w=1200&q=80'
   },
@@ -77,8 +83,26 @@ export default function HomePage() {
         <div className="workGrid workGridA">
           {workItems.slice(0, 4).map((item) => (
             <a key={item.title} className="workCard" href={item.url} target="_blank" rel="noreferrer">
-              <div className="workImage" style={{ backgroundImage: `url(${item.image})` }}>
-                <span className="miniPlay">▶</span>
+              <div className="workImage" style={{ backgroundImage: item.video ? undefined : `url(${item.image})` }}>
+                {item.video ? (
+                  <video
+                    src={item.video}
+                    poster={item.image}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: item.videoFit || 'cover',
+                      display: 'block',
+                      background: '#000'
+                    }}
+                  />
+                ) : (
+                  <span className="miniPlay">▶</span>
+                )}
               </div>
               <span className="workLabel">{item.title}</span>
             </a>
@@ -88,8 +112,26 @@ export default function HomePage() {
         <div className="workGrid workGridB">
           {workItems.slice(4).map((item) => (
             <a key={item.title} className="workCard" href={item.url} target="_blank" rel="noreferrer">
-              <div className="workImage" style={{ backgroundImage: `url(${item.image})` }}>
-                <span className="miniPlay">▶</span>
+              <div className="workImage" style={{ backgroundImage: item.video ? undefined : `url(${item.image})` }}>
+                {item.video ? (
+                  <video
+                    src={item.video}
+                    poster={item.image}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: item.videoFit || 'cover',
+                      display: 'block',
+                      background: '#000'
+                    }}
+                  />
+                ) : (
+                  <span className="miniPlay">▶</span>
+                )}
               </div>
               <span className="workLabel">{item.title}</span>
             </a>

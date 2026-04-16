@@ -26,10 +26,40 @@ a {
   text-decoration: none;
 }
 
+.igMediaShell {
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+.igEmbed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
+}
+
+.igOfficialEmbed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  min-width: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+.igLabelLink {
+  text-decoration: none;
+  color: inherit;
+}
+
 .page {
   width: var(--container);
   margin: 0 auto;
-  background: var(--bg);
+  background: #000;
 }
 
 .hero {
@@ -95,6 +125,7 @@ a {
 
 .section {
   padding: 60px 40px;
+  background: #000;
 }
 
 .sectionHeader {
@@ -258,6 +289,7 @@ a {
   font-size: 11px;
   letter-spacing: 0.08rem;
   font-family: var(--font-mono), monospace;
+  background: #000;
 }
 
 .footerLinks {
