@@ -49,10 +49,19 @@
 ];
 
 const filmWork = [
-  'https://images.unsplash.com/photo-1695192699177-f98215c7bc4c?auto=format&fit=crop&w=1400&q=80',
-  'https://images.unsplash.com/photo-1616527563670-f13a38dcf1a7?auto=format&fit=crop&w=1400&q=80',
-  'https://images.unsplash.com/photo-1735199702109-7808e705691e?auto=format&fit=crop&w=1400&q=80',
-  'https://images.unsplash.com/photo-1693646377581-aa20f691ba8a?auto=format&fit=crop&w=1400&q=80'
+  { title: 'NIKON BIG FORMAT', video: '/bigFormat/nikonBigFormat.mp4' },
+  {
+    title: 'JAGERMEISTER FILM',
+    image: 'https://images.unsplash.com/photo-1616527563670-f13a38dcf1a7?auto=format&fit=crop&w=1400&q=80'
+  },
+  {
+    title: 'RIJKSWATERSTAAT DOCUMENTARY',
+    image: 'https://images.unsplash.com/photo-1735199702109-7808e705691e?auto=format&fit=crop&w=1400&q=80'
+  },
+  {
+    title: 'LOWLANDER CAMPAIGN',
+    image: 'https://images.unsplash.com/photo-1693646377581-aa20f691ba8a?auto=format&fit=crop&w=1400&q=80'
+  }
 ];
 
 const bts = [
@@ -153,7 +162,20 @@ export default function DesignTwoPage() {
         </header>
         <div className="d2FilmGrid">
           {filmWork.map((item, i) => (
-            <div key={i} className="d2FilmItem" style={{ backgroundImage: `url(${item})` }} />
+            <div key={i} className="d2FilmItem" style={{ backgroundImage: item.video ? undefined : `url(${item.image})` }}>
+              {item.video ? (
+                <video
+                  src={item.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              ) : null}
+              <span className="d2FilmLabel">{item.title}</span>
+            </div>
           ))}
         </div>
       </section>
@@ -176,7 +198,7 @@ export default function DesignTwoPage() {
           className="d2AboutImage"
           style={{
             backgroundImage:
-              'linear-gradient(to bottom, rgba(255,255,255,0) 40%, rgba(255,255,255,0.9) 100%), url(https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80)'
+              'linear-gradient(to bottom, rgba(255,255,255,0) 40%, rgba(255,255,255,0.9) 100%), url(https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=80)'
           }}
         />
       </section>

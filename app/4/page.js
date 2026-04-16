@@ -12,26 +12,36 @@ const reels = [
   {
     title: 'CORONA CERO x OLYMPICS',
     src: '/reels/coronacero.mp4',
+    poster:
+      'https://images.unsplash.com/photo-1514647780138-f0857d147db0?auto=format&fit=crop&w=900&q=80',
     profileUrl: 'https://www.instagram.com/corona/'
   },
   {
     title: 'JAGERMEISTER',
     src: '/reels/jagermeister.mp4',
+    poster:
+      'https://images.unsplash.com/photo-1618007592249-ef95e9424a4d?auto=format&fit=crop&w=900&q=80',
     profileUrl: 'https://www.instagram.com/jagermeister/'
   },
   {
     title: 'NIKON',
     src: '/reels/nikon.mp4',
+    poster:
+      'https://images.unsplash.com/photo-1765573831120-4e7f5e69ffca?auto=format&fit=crop&w=900&q=80',
     profileUrl: 'https://www.instagram.com/nikoneurope/'
   },
   {
     title: 'WOMEN INC',
     src: '/reels/womenInc.mp4',
+    poster:
+      'https://images.unsplash.com/photo-1771736817889-b49bdd30ca98?auto=format&fit=crop&w=900&q=80',
     profileUrl: 'https://www.instagram.com/women_inc/'
   },
   {
     title: 'LOWLANDER',
     src: '/reels/lowlander.mp4',
+    poster:
+      'https://images.unsplash.com/photo-1659459007084-15b336c71192?auto=format&fit=crop&w=900&q=80',
     profileUrl: 'https://www.instagram.com/lowlander/'
   }
 ];
@@ -114,7 +124,15 @@ export default function DesignFourPage() {
         </header>
         <div className={styles.btsGrid}>
           {btsImages.map((src, i) => (
-            <div key={i} className={styles.btsItem} style={{ backgroundImage: `url(${src})` }} />
+            <div key={i} className={styles.btsItem}>
+              <img
+                src={src}
+                alt={`Behind the scenes ${i + 1}`}
+                loading="lazy"
+                decoding="async"
+                className={styles.btsImg}
+              />
+            </div>
           ))}
         </div>
       </section>

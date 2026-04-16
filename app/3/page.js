@@ -66,6 +66,14 @@ const bts = [
   'https://images.unsplash.com/photo-1525189750212-fde62e50601a?auto=format&fit=crop&w=1200&q=80'
 ];
 
+const filmRows = [
+  { title: 'NIKON BIG FORMAT', video: '/bigFormat/nikonBigFormat.mp4' },
+  {
+    title: 'CORONA CERO BRAND FILM',
+    image: 'https://images.unsplash.com/photo-1695192699177-f98215c7bc4c?auto=format&fit=crop&w=1400&q=80'
+  }
+];
+
 export const metadata = {
   title: 'Design 3 | Artisan Editorial Warm'
 };
@@ -129,6 +137,32 @@ export default function DesignThreePage() {
             </div>
           </a>
         ))}
+      </section>
+
+      <section className={styles.filmSection}>
+        <h2>Film Work</h2>
+        <div className={styles.filmGrid}>
+          {filmRows.map((item) => (
+            <div
+              key={item.title}
+              className={styles.filmItem}
+              style={{ backgroundImage: item.video ? undefined : `url(${item.image})` }}
+            >
+              {item.video ? (
+                <video
+                  src={item.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              ) : null}
+              <span className={styles.filmLabel}>{item.title}</span>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className={styles.aboutSection}>

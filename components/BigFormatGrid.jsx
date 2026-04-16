@@ -1,10 +1,30 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from '../app/4/page.module.css';
 
 export default function BigFormatGrid({ items }) {
   const refs = useRef({});
+  const [ready, setReady] = useState(false);
+  const gridRef = useRef(null);
+
+  useEffect(() => {
+    const node = gridRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setReady(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '300px 0px' }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   const handleEnter = (key) => {
     const v = refs.current[key];
@@ -17,7 +37,7 @@ export default function BigFormatGrid({ items }) {
   };
 
   return (
-    <div className={styles.bigGrid}>
+    <div ref={gridRef} className={styles.bigGrid}>
       {items.map((item, i) => {
         const key = item.src || `empty-${i}`;
         return (
@@ -32,11 +52,11 @@ export default function BigFormatGrid({ items }) {
                 ref={(el) => {
                   if (el) refs.current[key] = el;
                 }}
-                src={item.src}
+                src={ready ? item.src : undefined}
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                preload="none"
                 className={styles.bigVideo}
               />
             ) : (

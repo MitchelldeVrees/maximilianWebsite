@@ -215,10 +215,23 @@ a {
 }
 
 .filmItem {
+  position: relative;
   border-radius: 8px;
   min-height: 380px;
   background-size: cover;
   background-position: center;
+  overflow: hidden;
+}
+
+.filmLabel {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.12rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .aboutSection {
@@ -551,9 +564,22 @@ a {
 }
 
 .d2FilmItem {
+  position: relative;
   min-height: 380px;
   background-size: cover;
   background-position: center;
+  overflow: hidden;
+}
+
+.d2FilmLabel {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  color: #fff;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.08rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
 }
 
 .d2About {

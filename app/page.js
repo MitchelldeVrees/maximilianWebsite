@@ -50,10 +50,19 @@
 ];
 
 const filmItems = [
-  'https://images.unsplash.com/photo-1643651388510-835ee7e61119?auto=format&fit=crop&w=1400&q=80',
-  'https://images.unsplash.com/photo-1702221294082-fec37c8ba6e6?auto=format&fit=crop&w=1400&q=80',
-  'https://images.unsplash.com/photo-1587050063131-1ac5bf6d7e7e?auto=format&fit=crop&w=1400&q=80',
-  'https://images.unsplash.com/photo-1626841006734-d86374b3254c?auto=format&fit=crop&w=1400&q=80'
+  { title: 'NIKON BIG FORMAT', video: '/bigFormat/nikonBigFormat.mp4' },
+  {
+    title: 'CORONA CERO BRAND FILM',
+    image: 'https://images.unsplash.com/photo-1702221294082-fec37c8ba6e6?auto=format&fit=crop&w=1400&q=80'
+  },
+  {
+    title: 'LOWLANDER CAMPAIGN',
+    image: 'https://images.unsplash.com/photo-1587050063131-1ac5bf6d7e7e?auto=format&fit=crop&w=1400&q=80'
+  },
+  {
+    title: 'APPLIED ART FORMS',
+    image: 'https://images.unsplash.com/photo-1626841006734-d86374b3254c?auto=format&fit=crop&w=1400&q=80'
+  }
 ];
 
 const btsItems = [
@@ -146,8 +155,21 @@ export default function HomePage() {
           <h2>FILM WORK</h2>
         </header>
         <div className="filmGrid">
-          {filmItems.map((image, i) => (
-            <div key={i} className="filmItem" style={{ backgroundImage: `url(${image})` }} />
+          {filmItems.map((item, i) => (
+            <div key={i} className="filmItem" style={{ backgroundImage: item.video ? undefined : `url(${item.image})` }}>
+              {item.video ? (
+                <video
+                  src={item.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              ) : null}
+              <span className="filmLabel">{item.title}</span>
+            </div>
           ))}
         </div>
       </section>
@@ -159,7 +181,7 @@ export default function HomePage() {
           className="aboutImage"
           style={{
             backgroundImage:
-              'linear-gradient(to bottom, rgba(10,10,10,0) 40%, rgba(10,10,10,0.85) 85%, #0a0a0a 100%), url(https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80)'
+              'linear-gradient(to bottom, rgba(10,10,10,0) 40%, rgba(10,10,10,0.85) 85%, #0a0a0a 100%), url(https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=80)'
           }}
         />
         <div className="aboutCopy">
