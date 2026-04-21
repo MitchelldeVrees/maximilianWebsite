@@ -1,11 +1,10 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import styles from '../app/4/page.module.css';
+import styles from '../app/page.module.css';
 
 export default function ReelsMarquee({ reels }) {
   const [paused, setPaused] = useState(false);
-  const [activeKey, setActiveKey] = useState(null);
   const [ready, setReady] = useState(false);
   const videoRefs = useRef({});
   const viewportRef = useRef(null);
@@ -28,9 +27,18 @@ export default function ReelsMarquee({ reels }) {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!ready) return;
+    Object.values(videoRefs.current).forEach((v) => {
+      if (!v) return;
+      const showFirstFrame = () => { v.currentTime = 0.001; };
+      v.addEventListener('loadedmetadata', showFirstFrame, { once: true });
+      if (v.readyState >= 1) showFirstFrame();
+    });
+  }, [ready]);
+
   const handleEnter = (key) => {
     setPaused(true);
-    setActiveKey(key);
     const v = videoRefs.current[key];
     if (v) {
       v.currentTime = 0;
@@ -40,7 +48,6 @@ export default function ReelsMarquee({ reels }) {
 
   const handleLeave = (key) => {
     setPaused(false);
-    setActiveKey(null);
     const v = videoRefs.current[key];
     if (v) {
       v.pause();
@@ -76,19 +83,9 @@ export default function ReelsMarquee({ reels }) {
                 muted
                 loop
                 playsInline
-                preload="none"
+                preload={ready ? 'metadata' : 'none'}
                 className={styles.reelVideo}
               />
-              {reel.poster ? (
-                <img
-                  src={reel.poster}
-                  alt={`${reel.title} thumbnail`}
-                  loading="lazy"
-                  decoding="async"
-                  className={styles.reelPoster}
-                  style={{ opacity: activeKey === key ? 0 : 1 }}
-                />
-              ) : null}
               <span className={styles.reelLabel}>{reel.title}</span>
             </a>
           );
